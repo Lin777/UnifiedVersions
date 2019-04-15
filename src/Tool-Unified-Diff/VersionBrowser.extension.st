@@ -36,8 +36,6 @@ VersionBrowser >> browserForList: aList [
 
 { #category : #'*Tool-Unified-Diff' }
 VersionBrowser >> showUnifiedSourceWithConverter: aConverter [
-	| behavior |
-	behavior := browser textModel behavior.
 	browser textModel: browser newUnifiedDiff.
 	browser needRebuild: false.
 	browser openWithSpec.

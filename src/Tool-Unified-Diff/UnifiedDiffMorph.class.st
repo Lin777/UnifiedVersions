@@ -161,9 +161,7 @@ UnifiedDiffMorph >> from: old to: new [
 	self
 		applyPrettyPrinter;
 		calculateDifference;
-		
 		newStringOfDifference;
-		
 		calculateJoinMappings;
 		calibrateScrollbar;
 		applyHighlights;
@@ -213,7 +211,6 @@ UnifiedDiffMorph >> newCopyMorph [
 	copy setText: destTextModel getText.
 		^ copy newScrolledText
 		vScrollbarShowNever;
-		"beForSmalltalkCode;"
 		beNotWrapped;
 		beReadOnly;
 		yourself
