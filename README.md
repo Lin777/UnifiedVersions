@@ -31,4 +31,4 @@ UnifiedDiffMorph from: '(Array
 
 ## Result
 
-![Alt text](unified.svg?raw=true "Result of unified view of changes")
+![Alt text](unified.png?raw=true "Result of unified view of changes")
