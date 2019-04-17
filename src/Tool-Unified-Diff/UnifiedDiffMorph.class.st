@@ -8,6 +8,16 @@ Class {
 	#category : #'Tool-Unified-Diff-Morphs'
 }
 
+{ #category : #'instance creation' }
+UnifiedDiffMorph class >> from: old to: new [
+	"Answer a new instance of the receiver with the given
+	old and new text."
+
+	^self new showOnlyDestination: true;
+		from: old
+		to: new
+]
+
 { #category : #actions }
 UnifiedDiffMorph >> calculatedJoinMappings [
 	"Calculate the join parameters between src and dst and answer"
