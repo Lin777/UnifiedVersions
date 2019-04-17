@@ -31,4 +31,4 @@ UnifiedDiffMorph from: '(Array
 
 ## Result
 
-![Alt text](unified.png?raw=true "Result of unified view of changes")
+![An image](unified.png) <!-- .element height="50%" width="50%" -->
