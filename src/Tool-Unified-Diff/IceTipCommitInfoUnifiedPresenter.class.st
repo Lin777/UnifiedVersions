@@ -61,8 +61,18 @@ IceTipCommitInfoUnifiedPresenter >> refreshUnifiedDiffFromAncestor [
 ]
 
 { #category : #private }
+IceTipCommitInfoUnifiedPresenter >> refreshUnifiedDiffFromAncestorLabel [
+	ancestorTabUnifiedContainer updateLabelOn: selectedModel
+]
+
+{ #category : #private }
 IceTipCommitInfoUnifiedPresenter >> refreshUnifiedDiffFromHead [
 	headTabUnifiedContainer updateUnifiedContentsOn: selectedModel
+]
+
+{ #category : #private }
+IceTipCommitInfoUnifiedPresenter >> refreshUnifiedDiffFromHeadLabel [
+	headTabUnifiedContainer updateLabelOn: selectedModel
 ]
 
 { #category : #private }
@@ -82,6 +92,8 @@ IceTipCommitInfoUnifiedPresenter >> showInfoTabs [
 	"refresh tab headers"
 	self refreshDiffFromHeadLabel.
 	self refreshDiffFromAncestorLabel.
+	self refreshUnifiedDiffFromHeadLabel .
+	self refreshUnifiedDiffFromAncestorLabel .
 	"Refresh selected tab contents"
 	commitTabPanel selectedTab ifNotNil: #tabSelected.
 
