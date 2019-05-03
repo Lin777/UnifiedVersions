@@ -129,10 +129,10 @@ UnifiedDiffMorph >> calculatedJoinMappings [
 				lineRemove := (destinationRunEnd - destinationRunStart) - (copyRunEnd - copyRunStart) ].
 			copyRunStart = 0
 				ifTrue: [ type = #removal ifFalse: [ copyRunStart := copyLine]
-					ifTrue: [ copyRunStart := copyLine + 1.
-						lineRemove := (destinationRunEnd - destinationRunStart) - (sourceRunEnd - sourceRunStart)]].
-				joins
-				add: (self newJoinSectionFrom: (sourceRunStart to: sourceRunEnd) 
+					ifTrue: [ copyRunStart := copyLine + 1]].
+					type = #removal ifTrue: [
+						lineRemove := (destinationRunEnd - destinationRunStart) - (sourceRunEnd - sourceRunStart)].
+				joins add: (self newJoinSectionFrom: (sourceRunStart to: sourceRunEnd) 
 					to: (destinationRunStart to: destinationRunEnd)
 					copyRange: (copyRunStart to: copyRunEnd ) 
 					withType: type
