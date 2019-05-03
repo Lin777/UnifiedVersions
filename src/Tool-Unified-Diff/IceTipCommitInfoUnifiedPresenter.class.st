@@ -29,7 +29,6 @@ IceTipCommitInfoUnifiedPresenter >> beForMerge [
 { #category : #initialization }
 IceTipCommitInfoUnifiedPresenter >> initializeCommitPanel [
 	"This will be initialised in fact on the first refresh"
-	self flag: 'Add two tabs'.
 	commitTabPanel
 		addTab: (infoTab := self newInfoTab);
 		addTab: (headTab := self newDiffTab 

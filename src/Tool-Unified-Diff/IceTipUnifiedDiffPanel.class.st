@@ -6,7 +6,6 @@ Class {
 
 { #category : #initialization }
 IceTipUnifiedDiffPanel >> initializeWidgets [
-	self flag: 'Extended diff panel'.
 	changeList := self newIceTable.
 	diffPanel := self instantiate: DiffUnified .
 	
