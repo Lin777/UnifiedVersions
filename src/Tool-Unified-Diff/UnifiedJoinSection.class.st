@@ -61,12 +61,12 @@ UnifiedJoinSection >> createHighlights [
 ]
 
 { #category : #copying }
-UnifiedJoinSection >> createHighlightsFrom: srcPara to: dstPara withCopy: copyPara [
+UnifiedJoinSection >> createHighlightsFrom: srcPara to: dstPara withCopy: copyPara flagRemove: aNumber [
 	"Create and store the src and dst highlights.
 	Use the given paragraphs to determine inline
 	diffs."
 
-	| d dr si di ci csi cdr srcText copyText diffs i sb eb line |
+	| d si di dri ci srcText copyText diffs i sb eb line |
 	
 	self createHighlights.
 	self src lineRange notEmpty
@@ -80,9 +80,8 @@ UnifiedJoinSection >> createHighlightsFrom: srcPara to: dstPara withCopy: copyPa
 		ifTrue: [ 
 			line := dstPara lines at: self dst lineRange first.
 			di := line first.
-			line := dstPara lines at: self dst lineRange last.
-			self dst lineRange last + 1 <= dstPara lines size 
-			ifTrue: [ dr := (dstPara lines at: self dst lineRange last + 1) first]].
+			line := dstPara lines at: self dst lineRange first + aNumber.
+			dri := line first].
 	self copy1 lineRange notEmpty
 		ifTrue: [ 
 			line := copyPara lines at: self copy1 lineRange first.
@@ -96,8 +95,7 @@ UnifiedJoinSection >> createHighlightsFrom: srcPara to: dstPara withCopy: copyPa
 		ifFalse: [ ^ self ].
 	d := self dst highlights.
 	diffs := (InlineTextDiffBuilder from: srcText to: copyText) buildPatchSequence groupByRuns: [ :e | e key ].
-	csi := si.
-	cdr := dr.
+	
 	diffs
 		do: [ :c | 
 			c first key = #match
@@ -106,7 +104,8 @@ UnifiedJoinSection >> createHighlightsFrom: srcPara to: dstPara withCopy: copyPa
 						do: [ :a | 
 							si := si + a value size.
 							di := di + a value size.
-							ci := ci + a value size ] ].
+							ci := ci + a value size.
+							dri := dri + a value size ] ].
 			c first key = #insert
 				ifTrue: [ 
 					i := di.
@@ -120,18 +119,16 @@ UnifiedJoinSection >> createHighlightsFrom: srcPara to: dstPara withCopy: copyPa
 						to: d
 						color: self additionHighlightColor ].
 			c first key = #remove
-				ifTrue: [ |rem|
-					rem := 0.
-					c do: [ :a | rem := rem + a value size ].
-					si := si + rem.
-					dr := cdr + (si - csi).
-					sb := dstPara  characterBlockForIndex: dr - rem.
-					eb := dstPara characterBlockForIndex: dr - 1.
+				ifTrue: [ i := dri.
+					c do: [ :a | si := si + a value size .
+						dri := dri + a value size].
+					sb := dstPara characterBlockForIndex: i.
+					eb := dstPara characterBlockForIndex: dri - 1.
 					self
 						addHighlightsFrom: sb
 						to: eb
 						to: d
-						color: self removalHighlightColor ] ]
+						color: self removalHighlightColor ]  ]
 ]
 
 { #category : #copying }
